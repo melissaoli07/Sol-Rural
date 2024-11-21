@@ -1,0 +1,108 @@
+#include <WiFi.h>
+#include <PubSubClient.h>
+
+// Configurações do WiFi
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
+
+// Configurações do MQTT
+const char* mqttServer = "broker.hivemq.com";
+const int mqttPort = 1883;
+const char* mqttClientID = "ESP32_LDR_Client";
+const char* topicLDR = "sensor/luz";
+const char* topicComando = "comando/luz";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// Definição dos pinos
+int ldrPin = 34;
+int ledVerde = 25;
+int ledVermelho = 26;
+
+// Variáveis de controle
+int valorLDR = 0;
+int limiteSuperior = 3000;
+int limiteInferior = 1000;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+
+  // Conectar ao WiFi
+  Serial.println("Conectando ao WiFi...");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi conectado!");
+
+  // Configurar cliente MQTT
+  client.setServer(mqttServer, mqttPort);
+  client.setCallback(receberComando); // Callback para comandos MQTT
+  conectarMQTT();
+}
+
+void loop() {
+  if (!client.connected()) {
+    conectarMQTT();
+  }
+  client.loop();
+
+  // Leitura do LDR
+  valorLDR = analogRead(ldrPin);
+
+  // Enviar dados ao broker MQTT
+  enviarMQTT(valorLDR);
+
+  delay(1000);
+}
+
+void conectarMQTT() {
+  while (!client.connected()) {
+    Serial.println("Conectando ao broker MQTT...");
+    if (client.connect(mqttClientID)) {
+      Serial.println("Conectado ao broker MQTT!");
+      client.subscribe(topicComando); // Inscrever-se no tópico de comando
+    } else {
+      Serial.print("Falha na conexão. Erro: ");
+      Serial.print(client.state());
+      Serial.println(". Tentando novamente em 5 segundos...");
+      delay(5000);
+    }
+  }
+}
+
+void enviarMQTT(int valor) {
+  char mensagem[50];
+  snprintf(mensagem, 50, "{\"valorLDR(quantidade de luz)\": %d}", valor);
+  client.publish(topicLDR, mensagem);
+  Serial.println(mensagem);
+}
+
+// Função callback para receber comandos MQTT
+void receberComando(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Mensagem recebida no tópico: ");
+  Serial.println(topic);
+
+  char mensagem[length + 1];
+  memcpy(mensagem, payload, length);
+  mensagem[length] = '\0';
+
+  Serial.print("Comando recebido: ");
+  Serial.println(mensagem);
+
+  // Controle dos LEDs baseado no comando recebido
+  if (strcmp(mensagem, "ligar LED verde") == 0) {
+    digitalWrite(ledVerde, HIGH);
+    digitalWrite(ledVermelho, LOW);
+  } else if (strcmp(mensagem, "ligar LED vermelho") == 0) {
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledVermelho, HIGH);
+  } else if (strcmp(mensagem, "desligar LEDs") == 0) {
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledVermelho, LOW);
+  }
+}
