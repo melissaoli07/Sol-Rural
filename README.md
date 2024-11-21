@@ -5,7 +5,7 @@ Melissa de Oliveira Pecoraro - RM98698
 Pamella Schimalesky Engholm- RM551600  
 Roberto Menezes Dos Santos - RM552520
 ## Indíce
-1. [Visão Geral](visão-geral)
+1. [Visão Geral](#visão-geral)
 2. [Tecnologias Utilizadas](tecnologias-utilizadas)
 3. [Pré-requisitos](pré-requisitos)
 4. [Configuração do Hardware](configuração-do-hardware)
