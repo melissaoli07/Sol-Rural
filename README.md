@@ -42,7 +42,7 @@ Antes de começar, você precisa ter o seguinte instalado:
 ### 4. Configuração do Hardware
 
 - Monte o circuito básico de acordo com a imagem:
-![Circuito](imagens/readme.png)
+- ![Circuito](imagens/readme.png)
 - Conecte o sensor LDR e os LEDs aos pinos que estão difinidos no código em C++ do arquivo: 'gs_iot.txt' utilizado no Wokwi.
 - Use resistores apropriados para proteger os LEDs.
 
@@ -58,7 +58,7 @@ Dashboard(Node-red):
 ### 6. Como Executar
 - Certifique-se de que o hardware está montado corretamente e o código no Wokwi foi carregado.
 - Rode o código em C++ do arquivo: 'gs_iot.txt' no Wokwi.
-- Rode 'node-red' e com o localhost já aberto, cole o json do fluxo de nós desse projeto disponível em: 'gs_iot.json' e confira na foto também disponilizada.
+- Rode 'node-red' e com o localhost já aberto, cole o json do fluxo de nós desse projeto disponível em: 'gs_iot.json' e confira na foto também disponilizada 'node-red.png'.
 - Com conexões ao broker sendo feita, no debug aparecerá as mensagens enviadas do Wokwi.
 - Acesse o dashboard com 'localhost/ui' no navegador para visualizar os dados em tempo real.
 
