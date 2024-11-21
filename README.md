@@ -6,12 +6,12 @@ Pamella Schimalesky Engholm- RM551600
 Roberto Menezes Dos Santos - RM552520
 ## Indíce
 1. [Visão Geral](#1-visão-geral)
-2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-3. [Pré-requisitos](#pré-requisitos)
-4. [Configuração do Hardware](#configuração-do-hardware)
-5. [Configuração do Software](#configuração-do-software)
-6. [Como Executar](#como-executar)
-7. [Testando a Solução](#testando-a-solução)
+2. [Tecnologias Utilizadas](#2-tecnologias-utilizadas)
+3. [Pré-requisitos](#3-pré-requisitos)
+4. [Configuração do Hardware](#4-configuração-do-hardware)
+5. [Configuração do Software](#5-configuração-do-software)
+6. [Como Executar](#6-como-executar)
+7. [Testando a Solução](#7-testando-a-solução)
    
 ### 1. Visão Geral
 O projeto "Energia Agrovoltaica" propõe uma solução inovadora para os desafios de escassez de energia e água no semiárido do Nordeste do Brasil. Esta região enfrenta dificuldades econômicas e sociais, com a escassez de recursos essenciais impactando diretamente a agricultura local. O objetivo do projeto é utilizar energia solar, uma fonte limpa e acessível, para promover o desenvolvimento sustentável em comunidades agrícolas, principalmente nas regiões do Sertão, onde a falta de energia elétrica e água potável é um obstáculo contínuo. A proposta envolve a criação de uma plataforma inteligente de monitoramento e controle de geração de energia solar, utilizando IoT para otimizar a utilização de energia solar e aumentar a eficiência das atividades agrícolas.
